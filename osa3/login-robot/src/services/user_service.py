@@ -37,12 +37,16 @@ class UserService:
     def validate(self, username, password):
         if not username or not password:
             print("Invalid")
-        if re.match("^[a-z\d]+$", username):
+        if len(username) < 3:
+            raise Exception("Username is too short")
+        if re.match(r"^[a-z]+$", username):
             print("Ok")
         else:
-            print("Invalid")
-        if re.match("^[a-z\d]+$", password):
+            raise Exception("Invalid username")
+        if len(password) < 8:
+            raise Exception("Password is too short")
+        if re.match(r"^(?=.*[^a-zA-Z])[a-zA-Z\d]+$", password):
             print("Ok")
         else:
-            print("Invalid")
+            raise Exception("Invalid password")
 
